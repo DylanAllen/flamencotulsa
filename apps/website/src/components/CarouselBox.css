@@ -1,0 +1,11 @@
+.carouselBox {
+  display: grid;
+  align-items: end;
+}
+.carouselTextContainer {
+  background-color: rgba(0,0,0,0.5);
+  padding: 20px;
+  display: inline-block;
+  width: 60%;
+  min-width: 300px;
+}

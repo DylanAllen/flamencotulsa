@@ -1,0 +1,37 @@
+.productGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.productImage {
+  height: 290px;
+  max-height: 25vw;
+}
+
+.productBox {
+  padding: 20px;
+  margin: 5px;
+  box-shadow: 0 0 5px #eaeaea;
+}
+
+.lightBox {
+  padding: 25px;
+}
+
+@media (max-width: 992px) {
+  .productGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .productImage {
+    max-height: 40vw;
+  }
+}
+
+@media (max-width: 600px) {
+  .productGrid {
+    grid-template-columns: 1fr;
+  }
+  .productImage {
+    max-height: 80vw;
+  }
+}

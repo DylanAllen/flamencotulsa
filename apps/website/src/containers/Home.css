@@ -1,0 +1,20 @@
+.Home .lander {
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.Home .logo {
+  height: 10vmin;
+  margin-bottom: 2rem;
+}
+
+div.mainTextContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 767px) {
+  div.mainTextContainer {
+    grid-template-columns: 1fr;
+  }
+}

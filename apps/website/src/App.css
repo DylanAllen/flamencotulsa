@@ -1,0 +1,39 @@
+.App {
+  margin-top: 0px;
+}
+
+.App .navbar-brand {
+  font-weight: bold;
+}
+
+.logo {
+  width: 400px;
+  max-width: 100%;
+}
+
+header#mainhead {
+  display: grid;
+  grid-template-columns: 1fr 470px;
+  align-items: baseline;
+}
+
+header#mainhead.mobile {
+  grid-template-columns: 1fr 45px;
+}
+
+.mainMenu {
+  list-style: none;
+  padding: 0;
+}
+
+.hamburgerMenu div {
+  text-align: center;
+}
+
+.hamburgerMenu div svg {
+  margin-left: auto;
+}
+
+span.floatright {
+    float: right;
+}

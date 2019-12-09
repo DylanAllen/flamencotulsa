@@ -1,0 +1,25 @@
+ul.mainMenu {
+  margin-left: auto;
+}
+
+.hamburgerMenu svg {
+  display: block;
+  margin-left: auto;
+}
+
+.mobileLinkList {
+  list-style: none;
+  padding: 0;
+}
+
+.mobileLink {
+  padding: 10px;
+}
+
+.mobileLinkLi {
+  line-height: normal;
+}
+
+a.mobileLink span div {
+  width: 3px;
+}

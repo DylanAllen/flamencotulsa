@@ -1,0 +1,19 @@
+{
+  "name": "flamencotulsa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dylan Allen",
+  "license": "ISC",
+  "dependencies": {
+    "glob": "^7.1.6",
+    "serverless-deployment-bucket": "^1.1.0",
+    "serverless-pseudo-parameters": "^2.5.0"
+  },
+  "devDependencies": {
+    "serverless-iam-roles-per-function": "^2.0.2"
+  }
+}
