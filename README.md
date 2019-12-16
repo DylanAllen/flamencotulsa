@@ -1,7 +1,7 @@
 # [FlamencoTulsa.com](https://new.flamencotulsa.com)
 
 
-> This is a website that I built for my wife. A bit over the top I admit, and I could have done all this with a CMS, but what would I have learned with that?
+> This is a website that I built for my wife (and it is not done yet). A bit over the top I admit, and I could have done all this with a CMS, but what would I have learned with that?
 
 **Stack:**
 - React
