@@ -1,4 +1,4 @@
-.productGrid {
+div.productGrid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }
@@ -19,7 +19,7 @@
 }
 
 @media (max-width: 992px) {
-  .productGrid {
+  div.productGrid {
     grid-template-columns: 1fr 1fr;
   }
   .productImage {
@@ -28,7 +28,7 @@
 }
 
 @media (max-width: 600px) {
-  .productGrid {
+  div.productGrid {
     grid-template-columns: 1fr;
   }
   .productImage {

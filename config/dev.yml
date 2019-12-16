@@ -3,3 +3,6 @@ identityProviderName: 'COGNITO'
 webDomain: http://localhost:3000
 authCallbackUrl: http://localhost:3000
 samlLogin: false
+cors: true
+adminEmail: 'dylan@reflejosflamencos.com'
+siteEmail: 'no-reply@flamencotulsa.com'

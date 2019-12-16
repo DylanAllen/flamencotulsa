@@ -4,7 +4,7 @@ import "./App.css";
 import Routes from "./Routes";
 import { Auth } from "aws-amplify";
 import MainMenu from './components/MainMenu.js';
-import { Grommet, Heading, Box, ResponsiveContext, Footer, Text } from 'grommet';
+import { Grommet, Heading, Box, ResponsiveContext, Text, Anchor } from 'grommet';
 import { FacebookOption } from 'grommet-icons';
 import { authReducer, initReducer } from './reducers/authReducer';
 import { theme } from './theme';
@@ -18,7 +18,14 @@ const initialState = {
   isChatStarted: false,
   isStartingChat: false,
   contactId: null,
-  transcript: []
+  transcript: [],
+  blogData: [],
+  activeBlog: {
+    title: '',
+    slug: '',
+    content: '',
+    excerpt: ''
+  }
 };
 
 function App(props) {
@@ -94,8 +101,18 @@ function App(props) {
         <Box id="footer" background="brand" pad="medium">
           <div className="container footcontainer">
             <Text size="large">
-              &copy; FlamencoTulsa 2019 <span className="floatright"><a href="https://www.facebook.com/Flamenco-Tulsa-107974785905865/"><FacebookOption /></a></span>
+              &copy; FlamencoTulsa 2019
             </Text>
+            {
+              state.isAuthenticated && <Box pad={{horizontal: 'small'}}>
+              <Anchor onClick={() => {props.history.push('/admin');}} label="Admin" />
+            </Box>
+            }
+            <span className="floatright">
+              <a href="https://www.facebook.com/Flamenco-Tulsa-107974785905865/">
+                <FacebookOption />
+              </a>
+            </span>
           </div>
         </Box>
       </Grommet>

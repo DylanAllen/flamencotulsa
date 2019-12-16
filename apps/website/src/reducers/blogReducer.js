@@ -36,8 +36,9 @@ export const blogReducer = (state, action) => {
       if (action.slug) {
         action.value.map((post) => {
           if (post.slug === action.slug) {
-            newstate.activeBlog = post;
+            return newstate.activeBlog = post;
           }
+          return null;
         })
       }
       return localStorageHandler(newstate);

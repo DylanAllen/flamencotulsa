@@ -1,6 +1,7 @@
 import "./ClassSchedule.css";
-import React from "react";
-import { Box, Text, Accordion, AccordionPanel, List, Heading } from 'grommet';
+import React, { useEffect, useState } from "react";
+import { Box, Text, Accordion, AccordionPanel, Heading, Paragraph } from 'grommet';
+import ClassForm from './ClassForm.js';
 
 const classData = [
   {name: 'Tulsa Kids Dance (Ages 4-11)', day: 'Wednesdays', time: '5:30 - 6pm', dates: 'Starting Jan 29, 2020, 14 week session', cost: '$157 for all 14 classes, $12 drop in', prereq: 'No Dance Experience Required / Closed-toe shoes with hard soles, boys wear comfortable exercise clothes with hard soles shoes, girls wear knee length or ankle length skirt; No tennis shoes! Hair pulled back from face.', loc: 'Destiny Dance Studio (81st & Sheridan)' },
@@ -22,25 +23,33 @@ const classObjToList = (classObj) => {
   let list = [];
   Object.keys(classObj).map((key) => {
     if (key === 'day' || key === 'time' || key === 'name') {
-      return;
+      return null;
     }
     list.push({
       key: classDataTitles[key],
       value: classObj[key]
     })
+    return key;
   })
-  console.log(list);
   return list;
 }
 
-
 export default function ClassSchedule(props) {
+
+  const list = []
+
+  useEffect(() => {
+    classData.map((classOb) => {
+      list.push(`${classOb.name} | ${classOb.time}`)
+    })
+    console.log('Setting classlist', list);
+  },[])
 
   let i = 0;
 
   return (
     <Box pad={{vertical: 'medium'}}>
-      <Accordion>
+      <Accordion elevation="medium" margin={{vertical: "small"}}>
         {
           classData.map((classOb) => {
 
@@ -51,9 +60,9 @@ export default function ClassSchedule(props) {
                 label={<Text size="large">{classOb.day} {classOb.time} | {classOb.name}</Text>}
                 key={classOb.name}
                 background={bgval}
-                pad="small"
+                pad="medium"
               >
-                <Box pad="medium" background={bgval}>
+                <Box pad={{horizontal: 'medium', bottom: 'medium'}} background={bgval}>
                   {
                     classObjToList(classOb).map((info) => {
                       return (
@@ -70,6 +79,12 @@ export default function ClassSchedule(props) {
           })
         }
       </Accordion>
+      <Paragraph fill={true}>
+        <strong>LOCATIONS:</strong><br/>
+        Adult Classes - Destiny Dance Studio - 81st & Sheridan , Tulsa, OK , Next to Perry's Meat Market<br/>
+        For more information contact: <a href="mailto:lexi@reflejosflamencos.com">lexi@reflejosflamencos.com</a>.
+      </Paragraph>
+        <ClassForm classList={list}  />
     </Box>
   )
 }

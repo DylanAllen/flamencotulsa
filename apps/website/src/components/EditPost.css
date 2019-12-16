@@ -1,0 +1,44 @@
+div.postEditContainer {
+  position: absolute;
+  z-index: 9;
+  background-color: #ffffff;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: max-content;
+}
+
+.postEditor {
+  height: 100%;
+}
+
+div.editorMenu {
+  grid-column: 1/ span 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
+div.editorPane {
+  overflow: scroll;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.saveButton {
+  float: right;
+}
+
+div.postEditFormField {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+@media (max-width: 800px) {
+  div.postEditContainer {
+    grid-template-columns: 1fr;
+  }
+}

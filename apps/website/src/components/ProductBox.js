@@ -1,6 +1,6 @@
 import "./ProductBox.css";
 import React, { useState } from "react";
-import { Box, Heading, Paragraph, Layer, Image, Button } from 'grommet';
+import { Box, Heading, Paragraph, Layer, Image, Button, Anchor, Text } from 'grommet';
 
 export default function ProductBox(props) {
   const { link, image, title, description } = props.product;
@@ -9,8 +9,8 @@ export default function ProductBox(props) {
     <Box
       className={"productBox"}
     >
-      <Heading level="4">
-        <a href={link}>{title}</a>
+      <Heading level="3" size="small" textAlign="center" truncate={true}>
+        <Anchor href={link} target="_blank" label={title} />
       </Heading>
       <Box className={"productImage"}>
         <Image
@@ -19,20 +19,29 @@ export default function ProductBox(props) {
           onClick={() => setShow(true)}
         />
       </Box>
-      <Paragraph>{description}</Paragraph>
+      <Text truncate={true}>{description}</Text>
       {show && (
         <Layer
           onEsc={() => setShow(false)}
           onClickOutside={() => setShow(false)}
           className="lightBox"
         >
+          <Heading level="3" size="small" textAlign="center">
+            <Anchor href={link} target="_blank" label={title} />
+          </Heading>
           <Image
-            fit="cover"
+            fit="contain"
             src={image}
+            style={{maxHeight: '60vh'}}
             onClick={() => setShow(true)}
           />
-        <Paragraph>{description}</Paragraph>
-        <Button label="Close" onClick={() => setShow(false)} />
+          <Box>
+            <Paragraph fill={true}>
+              {description}
+            </Paragraph>
+            <Anchor href={link} margin={'small'} style={{textAlign: 'center'}} target="_blank" label='Buy on Amazon' size="large" textAlign="center" />
+            <Button margin={'small'} label="Close" onClick={() => setShow(false)} />
+          </Box>
         </Layer>
       )}
     </Box>

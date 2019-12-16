@@ -13,7 +13,7 @@ export default function MainMenu(props) {
       { label: 'Classes', icon: StatusGood, to: '/classes', onClick: () => {history.push('/classes'); setMenuOpen(false)}, title: 'Classes' },
       { label: 'Blog', icon: Article, to: '/blog', onClick: () => {history.push('/blog'); setMenuOpen(false)}, title: 'Blog' },
       { label: 'Shop', icon: Shop, to: '/store', onClick: () => {history.push('/store'); setMenuOpen(false)}, title: 'Store' },
-      { label: 'Login', icon: Login, onClick: () => {history.push('/login'); setMenuOpen(false)}, disabled: state.isAuthenticated, to: '/login', title: 'Login' },
+      // { label: 'Login', icon: Login, onClick: () => {history.push('/login'); setMenuOpen(false)}, disabled: state.isAuthenticated, to: '/login', title: 'Login' },
       { label: 'Logout', icon: Logout, onClick: () => { handleLogout(); setMenuOpen(false); }, disabled: !state.isAuthenticated, to: '/logout', title: 'Logout' }
     ]
     let menu = [];

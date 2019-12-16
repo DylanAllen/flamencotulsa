@@ -8,6 +8,7 @@ import AppliedRoute from "./components/AppliedRoute";
 import Store from './containers/Store';
 import Classes from './containers/Classes';
 import Blog from './containers/Blog';
+import Admin from './containers/Admin';
 
 export default function Routes({ appProps }) {
   return (
@@ -19,6 +20,9 @@ export default function Routes({ appProps }) {
       <AppliedRoute path="/classes" component={Classes} appProps={appProps} />
       <AppliedRoute path="/blog/:slug" component={Blog} appProps={appProps} />
       <AppliedRoute path="/blog/" component={Blog} appProps={appProps} />
+      {
+        appProps.state.isAuthenticated && <AppliedRoute path="/admin" component={Admin} appProps={appProps} />
+      }
       {/* Finally, catch all unmatched routes */}
       <Route component={NotFound} />
     </Switch>

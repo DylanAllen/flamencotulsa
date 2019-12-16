@@ -1,6 +1,6 @@
 import "./Store.css";
 import React, { useReducer, useEffect } from "react";
-import { Box, Heading, Carousel, Paragraph } from 'grommet';
+import { Box, Heading, Paragraph } from 'grommet';
 import { productReducer, initReducer } from '../reducers/productReducer.js';
 import ProductBox from '../components/ProductBox.js';
 import config from '../config.js';
@@ -52,7 +52,7 @@ export default function Store(props) {
       >
         <Box gridArea="header">
           <Heading level="1" color="brand">Shop</Heading>
-          <Paragraph size="large" color="dark-2">
+          <Paragraph size="large" color="dark-2" fill={true}>
             Recommended flamenco clothing, accessories and musical instruments
           </Paragraph>
         </Box>

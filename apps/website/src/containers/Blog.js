@@ -1,18 +1,8 @@
 import "./Home.css";
-import React, { useReducer, useEffect } from "react";
-import { Box, Heading, Text, Markdown, Anchor } from 'grommet';
-import { blogReducer, initBlogReducer } from '../reducers/blogReducer.js';
+import React, { useEffect } from "react";
+import { Box, Heading, Text, Markdown, Anchor, Paragraph } from 'grommet';
 import config from '../config.js';
-
-const getBlogs = async () => {
-  try {
-    const apiCall = await fetch(`${config.apiGateway.URL}/blog`);
-    const blogs = await apiCall.json();
-    return blogs;
-  } catch(err) {
-    return []
-  }
-}
+import { loadBlogData, setBlogPost } from '../services/blogService';
 
 const blogStateInit = {
   blogData: [],
@@ -26,61 +16,24 @@ const blogStateInit = {
 
 export default function Blog(props) {
 
-  const { history } = props;
+  const { history, state, dispatch } = props;
 
-  const [ state, dispatch ] = useReducer(blogReducer, blogStateInit, initBlogReducer);
-
-  const loadBlogData = async (slug) => {
-    if (state.blogData.length) {
-      console.log(state, slug);
-      setBlogPost(slug);
-      return null
-    }
-
-    const localData = window.localStorage.getItem('blogState')
-
-    if (localData) {
-      const localStore = JSON.parse(localData);
-      const timeLimit = new Date().valueOf() - 300000;
-      if (localStore.timestamp > timeLimit) {
-        dispatch({ type: 'setBlogData', value: localStore.blogData, slug: slug });
-        return slug
-      }
-
-    }
-
-    const blogs = await getBlogs();
-    console.log(blogs)
-    dispatch({ type: 'setBlogData', value: blogs, slug: slug });
-    setBlogPost(slug);
-  }
-
-  const setBlogPost = (slug) => {
-    if (slug) {
-      console.log('slug', slug, 'blogstate', state);
-      state.blogData.map((post) => {
-        if (post.slug === slug) {
-          console.log('Setting post', post);
-          dispatch({ type: 'setActiveBlog', value: post })
-        }
-      })
-    }
-  }
+  console.log(state);
 
   useEffect(() => {
-    loadBlogData(props.match.params.slug);
+    loadBlogData(props.match.params.slug, state, dispatch);
   },[])
 
   const BlogPost = (props) => {
 
     return (
       <Box key={state.activeBlog.slug}>
-        <Heading level="1">{state.activeBlog.title}</Heading>
+        <Heading level="1" style={{maxWidth: '100%'}}>{state.activeBlog.title}</Heading>
         <Markdown components={
           {
             "p": {
-              "component": "Paragraph",
-              "props": {"size": "large", fill: "true"}
+              "component": Paragraph,
+              "props": {"size": "large", fill: true}
             }
           }}
         >{state.activeBlog.content}</Markdown>
@@ -95,8 +48,8 @@ export default function Blog(props) {
       {
         state.blogData.map((post) => {
           return (
-            <Box pad="medium" border="bottom" key={post.slug}>
-              <Heading level="3"><Anchor onClick={()=> {setBlogPost(post.slug); history.push(`blog/${post.slug}`);}}>{post.title}</Anchor></Heading>
+            <Box pad="medium" border="bottom" key={post.slug} elevation="medium" margin={{vertical: 'small'}}>
+              <Heading level="3" style={{maxWidth: '100%'}}><Anchor onClick={()=> {setBlogPost(post.slug, state, dispatch); history.push(`blog/${post.slug}`);}}>{post.title}</Anchor></Heading>
               <Text>{post.excerpt}</Text>
             </Box>
           )

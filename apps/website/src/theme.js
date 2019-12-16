@@ -191,88 +191,88 @@ export const theme = {
         "small": {
           "size": "28.333333333333336px",
           "height": "33.333333333333336px",
-          "maxWidth": "566.6666666666667px"
+          "maxWidth": "100%"
         },
         "medium": {
           "size": "41.66666666666667px",
           "height": "46.66666666666667px",
-          "maxWidth": "833.3333333333335px"
+          "maxWidth": "100%"
         },
         "large": {
           "size": "68.33333333333334px",
           "height": "73.33333333333334px",
-          "maxWidth": "1366.666666666667px"
+          "maxWidth": "100%"
         },
         "xlarge": {
           "size": "95px",
           "height": "100px",
-          "maxWidth": "1900px"
+          "maxWidth": "100%"
         }
       },
       "2": {
         "small": {
           "size": "21.666666666666668px",
           "height": "26.666666666666668px",
-          "maxWidth": "433.33333333333337px"
+          "maxWidth": "100%"
         },
         "medium": {
           "size": "28.333333333333336px",
           "height": "33.333333333333336px",
-          "maxWidth": "566.6666666666667px"
+          "maxWidth": "100%"
         },
         "large": {
           "size": "41.66666666666667px",
           "height": "46.66666666666667px",
-          "maxWidth": "833.3333333333335px"
+          "maxWidth": "100%"
         },
         "xlarge": {
           "size": "55px",
           "height": "60px",
-          "maxWidth": "1100px"
+          "maxWidth": "100%"
         }
       },
       "3": {
         "small": {
           "size": "18.333333333333332px",
           "height": "23.333333333333332px",
-          "maxWidth": "366.66666666666663px"
+          "maxWidth": "100%"
         },
         "medium": {
           "size": "21.666666666666668px",
           "height": "26.666666666666668px",
-          "maxWidth": "433.33333333333337px"
+          "maxWidth": "100%"
         },
         "large": {
           "size": "28.333333333333336px",
           "height": "33.333333333333336px",
-          "maxWidth": "566.6666666666667px"
+          "maxWidth": "100%"
         },
         "xlarge": {
           "size": "35px",
           "height": "40px",
-          "maxWidth": "700px"
+          "maxWidth": "100%"
         }
       },
       "4": {
         "small": {
           "size": "15px",
           "height": "20px",
-          "maxWidth": "300px"
+          "maxWidth": "500px"
         },
         "medium": {
           "size": "15px",
           "height": "20px",
-          "maxWidth": "300px"
+          "maxWidth": "600px"
         },
         "large": {
           "size": "15px",
           "height": "20px",
-          "maxWidth": "300px"
+          "maxWidth": "700px"
         },
         "xlarge": {
           "size": "15px",
           "height": "20px",
-          "maxWidth": "300px"
+          "maxWidth": "800px"
         }
       },
       "5": {

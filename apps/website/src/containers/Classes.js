@@ -11,16 +11,18 @@ export default function Classes(props) {
         heading={'Dance'}
         text={'We like to dance!'}
       />
-    <Box pad={{ vertical: 'large' }}>
-        <Paragraph size="large" fill="true" margin="medium">
+      <Box pad={{ vertical: 'large' }} width="xlarge" alignSelf="center">
+        <Paragraph size="large" fill={true} margin={{vertical: 'medium'}}>
           Flamenco Tulsa offers weekly group flamenco dance classes as well as private flamenco guitar classes. You can check out our class schedule and enrollment form below!
         </Paragraph>
-        <Paragraph size="large" fill="true" margin="medium">
+        <Paragraph size="large" fill={true} margin={{vertical: 'medium'}}>
           As part of our mission to share the flamenco art form with our Tulsa community we also host yearly workshops with traveling flamenco artists. Keep an eye out for information on these workshops on our website, facebook and twitter! For more information email <a href="mailto:info@reflejosflamencos.com">info@reflejosflamencos.com</a>.
         </Paragraph>
       </Box>
-      <Heading level="2">Class Info</Heading>
-      <ClassSchedule />
+      <Box width="xlarge" alignSelf="center">
+        <Heading level="2">Class Info</Heading>
+        <ClassSchedule />
+      </Box>
     </Box>
   )
 }

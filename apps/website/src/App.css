@@ -37,3 +37,8 @@ header#mainhead.mobile {
 span.floatright {
     float: right;
 }
+
+.footcontainer {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+}

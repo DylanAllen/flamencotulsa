@@ -31,5 +31,9 @@ module.exports.handler = async (event, context) => {
       return await getProducts();
     case 'POST':
       return await getProducts();
+    default:
+      return apiResponse({
+        message: 'invalid input'
+      })
   }
 }
