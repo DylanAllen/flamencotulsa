@@ -1,5 +1,5 @@
 import "./ClassSchedule.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Box, Text, Accordion, AccordionPanel, Heading, Paragraph } from 'grommet';
 import ClassForm from './ClassForm.js';
 
@@ -40,7 +40,7 @@ export default function ClassSchedule(props) {
 
   useEffect(() => {
     classData.map((classOb) => {
-      list.push(`${classOb.name} | ${classOb.time}`)
+      return list.push(`${classOb.name} | ${classOb.time}`)
     })
     console.log('Setting classlist', list);
   },[])

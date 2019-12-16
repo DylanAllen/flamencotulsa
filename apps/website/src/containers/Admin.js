@@ -1,11 +1,10 @@
 import "./Admin.css";
 import React, { useEffect, useState } from "react";
-import { Box, Heading, Text, Button, Anchor } from 'grommet';
+import { Box, Heading, Text, Button } from 'grommet';
 import AppliedRoute from "../components/AppliedRoute";
 import EditPost from '../components/EditPost';
 import AdminMenu from '../components/AdminMenu';
 import config from '../config.js';
-import { Route } from "react-router-dom";
 import { deletePost } from '../services/blogService';
 
 const getBlogs = async () => {
@@ -23,7 +22,6 @@ export default function Admin(props) {
 
   const { state, dispatch, history } = props;
 
-  const [activePost, setActivePost] = useState(null);
   const [slug, setSlug] = useState(null);
 
   const deleteHandler = async (id) => {
@@ -71,9 +69,11 @@ export default function Admin(props) {
       state.blogData.map((post) => {
         if (post.slug === slug) {
           console.log('Setting post', post);
-          dispatch({ type: 'setActiveBlog', value: post })
+          return dispatch({ type: 'setActiveBlog', value: post })
         }
+        return null;
       })
+      return null;
     }
   }
 
@@ -88,7 +88,6 @@ export default function Admin(props) {
             <Box className="adminPost" key={post.id} border={'bottom'} margin={{bottom: 'small'}} pad="small" elevation="small">
               <Text size="large">{post.title}</Text>
               <Button label='Edit' onClick={() => {
-                  setActivePost(post)
                   setSlug(post.slug)
                   props.history.push(`/admin/blog/${post.slug}`)
                 }} />

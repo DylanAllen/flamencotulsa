@@ -33,18 +33,6 @@ export default function Store(props) {
     loadProductData();
   }, [])
 
-  const carouselBoxStyle = (img, bgposition) => {
-    const imgUrl = img.startsWith('http') ? `url(${img}` : `url(${process.env.PUBLIC_URL}/${img})`;
-    return {
-      height: '500px',
-      width: '100%',
-      backgroundImage: imgUrl,
-      backgroundSize: 'cover',
-      backgroundPosition: bgposition,
-      padding: '5%'
-    }
-  }
-
   return (
     <div className="Store">
       <Box

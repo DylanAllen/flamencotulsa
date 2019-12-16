@@ -2,7 +2,7 @@ import "./EditPost.css";
 import React, { useEffect } from "react";
 import { Box, TextArea, FormField, Markdown, Button, Paragraph, TextInput } from 'grommet';
 import AdminMenu from './AdminMenu';
-import { loadBlogData, setBlogPost, postBlog } from '../services/blogService';
+import { loadBlogData, postBlog } from '../services/blogService';
 
 const savePost = async (slug, state, dispatch) => {
   console.log('save the post');
@@ -20,7 +20,9 @@ export default function EditPost(props) {
     state.blogData.map((post) => {
       if (post.slug === state.activeBlog.slug && post.id !== state.activeBlog.id) {
         overwrite = true;
+        return null;
       }
+      return null;
     })
     if (overwrite) {
       alert(`The URL slug "${state.activeBlog.slug}" is already in use. Please select another slug value`);
@@ -39,7 +41,6 @@ export default function EditPost(props) {
   ]
 
   useEffect(() => {
-    console.log(slug, state, dispatch)
     if (slug === 'new' && state.activeBlog.id) {
       dispatch({ type: 'setActiveBlog', value: {
         ContentType: 'blog',

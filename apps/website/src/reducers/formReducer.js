@@ -26,8 +26,9 @@ export const formReducer = (state, action) => {
         let newclasses = [];
         classes.map(className => {
           if (className !== action.className) {
-            newclasses.push(className)
+            return newclasses.push(className)
           }
+          return null;
         })
         newstate.Classes.value = newclasses;
       } else if (!classes.includes(action.className) && action.value) {

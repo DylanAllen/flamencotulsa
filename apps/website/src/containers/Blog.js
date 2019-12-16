@@ -1,18 +1,7 @@
 import "./Home.css";
 import React, { useEffect } from "react";
 import { Box, Heading, Text, Markdown, Anchor, Paragraph } from 'grommet';
-import config from '../config.js';
 import { loadBlogData, setBlogPost } from '../services/blogService';
-
-const blogStateInit = {
-  blogData: [],
-  activeBlog: {
-    title: '',
-    slug: '',
-    content: '',
-    excerpt: ''
-  }
-}
 
 export default function Blog(props) {
 
@@ -58,14 +47,6 @@ export default function Blog(props) {
       </Box>
     )
 
-  }
-
-  const TheContent = () => {
-    if (state.activeBlog) {
-      return <BlogPost />
-    } else {
-      return <BlogList />
-    }
   }
 
   return (

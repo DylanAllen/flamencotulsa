@@ -1,6 +1,6 @@
 import "./FormInput.css";
 import React from "react";
-import { Box, FormField, TextInput, CheckBox, Select } from 'grommet';
+import { Box, FormField, TextInput, CheckBox } from 'grommet';
 
 
 export default function ClassForm(props) {
@@ -12,21 +12,6 @@ export default function ClassForm(props) {
   if (!data) {
     return null;
   }
-
-  const options = [
-    {
-      lab: 'This',
-      val: 'other'
-    },
-    {
-      lab: 'who',
-      val: 'is'
-    },
-    {
-      lab: 'and',
-      val: 'how'
-    },
-  ];
 
   if (data.type === 'checkbox') {
     return (

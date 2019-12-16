@@ -36,13 +36,6 @@ export const loadBlogData = async (slug, state, dispatch, force=false) => {
   return dispatch({ type: 'setBlogData', value: blogs, slug: slug });
 }
 
-const b64EncodeUnicode = (str) => {
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
-        function toSolidBytes(match, p1) {
-            return String.fromCharCode('0x' + p1);
-    }));
-}
-
 export const postBlog = async (post, state, dispatch, slug) => {
 
   console.log(post);
@@ -85,11 +78,12 @@ export const deletePost = async (id, state, dispatch) => {
 export const setBlogPost = (slug, state, dispatch) => {
   if (slug) {
     console.log('slug', slug, 'blogstate', state);
-    state.blogData.map((post) => {
+    return state.blogData.map((post) => {
       if (post.slug === slug) {
         console.log('Setting post', post);
         return dispatch({ type: 'setActiveBlog', value: post })
       }
+      return null;
     })
   }
 }

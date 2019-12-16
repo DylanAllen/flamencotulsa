@@ -1,6 +1,6 @@
 import "./MainMenu.css";
 import React, { useState } from "react";
-import { Menu as MenuIcon, Home as HomeIcon, Shop, Logout, Login, Article, StatusGood } from 'grommet-icons';
+import { Menu as MenuIcon, Home as HomeIcon, Shop, Logout, Article, StatusGood } from 'grommet-icons';
 import { Box, DropButton, Anchor } from 'grommet';
 
 export default function MainMenu(props) {
