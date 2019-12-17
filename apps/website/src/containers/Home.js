@@ -7,22 +7,6 @@ export default function Home(props) {
 
   const { state } = props;
 
-  const startChatMarkup = (
-    <Box
-      tag='div'
-      direction='row'
-      align='center'
-      justify='between'
-      width='small'
-      alignContent="center"
-      alignSelf="center"
-      pad={{ vertical: 'small', horizontal: 'medium' }}
-    >
-    </Box>
-  );
-
-  const loginToStartMarkup = <p>Login to get started</p>;
-
   return (
     <div className="Home">
       <ResponsiveContext.Consumer>
@@ -32,7 +16,7 @@ export default function Home(props) {
               <CarouselBox
                 image={'feriapic.jpeg'}
                 heading={'Community'}
-                text={'FlamencoTulsa is a community of flamenco music and dance fans and aficionados.'}
+                text={'Flamenco Tulsa is a community of flamenco performers, students, and Spanish culture aficionados.'}
               />
             </Box>
             <Box className="mainTextContainer">
@@ -57,7 +41,7 @@ export default function Home(props) {
               <Box>
                 <Heading level={2} color={'accent-3'}>What is flamenco?</Heading>
                 <Paragraph fill={true} size="large">
-                  Flamenco is an art form that originated in the Southern part of Spain, called Andalucia. It developed as a mixture of cultural influences from the different people groups that lived and still live in Spain, such as the Christians, Jews, Moors, and Spanish gypsies. Influences from Indian music and dance can also be seen and heard, as the gypsies are thought to have travelled from India before settling in Southern Spain. The eveloution of this art form continues to this day with elements of jazz, blues, and classical dance common in today's flamenco.
+                  Flamenco is a music and dance art form that originated in the Southern part of Spain, called Andalucia. It developed as a mixture of cultural influences from the different people groups that lived and still live in Spain, such as the Christians, Jews, Moors, and Spanish gypsies. Influences from Indian music and dance can also be seen and heard, as the gypsies are thought to have travelled from India before settling in Southern Spain. The evolution of this art form continues to this day with elements of jazz, blues, and classical dance common in today's flamenco.
                 </Paragraph>
               </Box>
               <Heading level={2} color={'accent-3'}>Why is flamenco important?</Heading>
@@ -68,11 +52,6 @@ export default function Home(props) {
           </Box>
         )}
       </ResponsiveContext.Consumer>
-
-
-      <div className="chat">
-        {state.isAuthenticated ? startChatMarkup : loginToStartMarkup}
-      </div>
     </div>
   );
 }
