@@ -1,17 +1,28 @@
-.carouselBox {
+div.carouselBox {
   display: grid;
   align-items: end;
   height: 500px;
-  max-height: 60vw;
+  max-height: 90vw;
   width: 100%;
   background-size: cover;
   background-position: center center;
   padding: 5%;
 }
-.carouselTextContainer {
+div.carouselTextContainer {
   background-color: rgba(0,0,0,0.5);
   padding: 20px;
   display: inline-block;
   width: 60%;
   min-width: 300px;
+}
+
+@media (max-width: 767px) {
+
+  div.carouselBox {
+    align-items: center;
+  }
+  div.carouselTextContainer {
+    width: 100%;
+    min-width: 100%;
+  }
 }
