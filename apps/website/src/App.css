@@ -13,7 +13,7 @@
 
 header#mainhead {
   display: grid;
-  grid-template-columns: 1fr 470px;
+  grid-template-columns: 1fr 400px;
   align-items: baseline;
 }
 

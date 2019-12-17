@@ -5,17 +5,21 @@ import { Box, DropButton, Anchor } from 'grommet';
 
 export default function MainMenu(props) {
 
-  const { size, handleLogout, state, history } = props;
+  const { size, handleLogout, state, history, menuOverride } = props;
 
   const menuList = (props) => {
-    const menuItems = [
-      { label: 'Home', icon: HomeIcon, to: '/', onClick: () => {history.push('/'); setMenuOpen(false)}, title: 'Home' },
+    let menuItems = [
       { label: 'Classes', icon: StatusGood, to: '/classes', onClick: () => {history.push('/classes'); setMenuOpen(false)}, title: 'Classes' },
       { label: 'Blog', icon: Article, to: '/blog', onClick: () => {history.push('/blog'); setMenuOpen(false)}, title: 'Blog' },
       { label: 'Shop', icon: Shop, to: '/store', onClick: () => {history.push('/store'); setMenuOpen(false)}, title: 'Store' },
       // { label: 'Login', icon: Login, onClick: () => {history.push('/login'); setMenuOpen(false)}, disabled: state.isAuthenticated, to: '/login', title: 'Login' },
       { label: 'Logout', icon: Logout, onClick: () => { handleLogout(); setMenuOpen(false); }, disabled: !state.isAuthenticated, to: '/logout', title: 'Logout' }
     ]
+
+    if (menuOverride) {
+      menuItems = menuOverride;
+    }
+
     let menu = [];
     menuItems.map((item) => {
       if (!item.disabled) {
