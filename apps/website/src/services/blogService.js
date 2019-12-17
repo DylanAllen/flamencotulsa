@@ -40,6 +40,10 @@ export const postBlog = async (post, state, dispatch, slug) => {
 
   console.log(post);
 
+  if (!post.dateval) {
+    post.dateval = new Date().valueOf();
+  }
+
   try {
     const apiCall = await fetch(`${config.apiGateway.URL}/blog`, {
       method: 'post',
