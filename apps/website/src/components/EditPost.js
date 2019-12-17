@@ -1,8 +1,10 @@
 import "./EditPost.css";
 import React, { useEffect } from "react";
-import { Box, TextArea, FormField, Markdown, Button, Paragraph, TextInput } from 'grommet';
-import AdminMenu from './AdminMenu';
+import { Box, ResponsiveContext, TextArea, FormField, Markdown, Button, Paragraph, TextInput } from 'grommet';
+// import AdminMenu from './AdminMenu';
+import { Shop, Article, StatusGood } from 'grommet-icons';
 import { loadBlogData, postBlog } from '../services/blogService';
+import MainMenu from './MainMenu';
 
 const savePost = async (slug, state, dispatch) => {
   console.log('save the post');
@@ -35,9 +37,9 @@ export default function EditPost(props) {
   }
 
   const menuItems = [
-    { label: 'Manage Blog', onClick: () => {history.push('/admin/blog');}, title: 'Manage Blog' },
-    { label: 'Manage Enrollments', onClick: () => {history.push('/admin/enrollments');}, title: 'Manage Enrollments' },
-    { label: 'Manage Store', onClick: () => {history.push('/admin/store');}, title: 'Manage Store' }
+    { label: 'Blog', icon: Article, onClick: () => {history.push('/admin/blog');}, title: 'Manage Blog' },
+    { label: 'Enrollments', icon: StatusGood, onClick: () => {history.push('/admin/enrollments');}, title: 'Manage Enrollments' },
+    { label: 'Store', icon: Shop, onClick: () => {history.push('/admin/store');}, title: 'Manage Store' }
   ]
 
   useEffect(() => {
@@ -54,53 +56,63 @@ export default function EditPost(props) {
   },[])
 
   return (
-    <Box className="postEditContainer">
-      <Box className="editorMenu" border='bottom' pad={'small'}>
-        <AdminMenu menuItems={menuItems} />
-        <Button className="saveButton" label="Save" onClick={() => {
-            saveHandler()
-          }} />
+    <ResponsiveContext.Consumer>
+      {(size) => (
+      <Box className="postEditContainer">
+        <Box className="editorMenu" border='bottom' pad={'small'}>
+          <MainMenu
+            menuOverride={menuItems}
+            size={ size }
+            handleLogout={null}
+            history={ props.history }
+            state={ state }
+          />
+          <Button className="saveButton" label="Save" onClick={() => {
+              saveHandler()
+            }} />
+        </Box>
+        <Box elevation="small" pad="small" className="editorPane">
+          <FormField label="Post Title">
+            <TextInput placeholder="Post title" value={state.activeBlog.title} onChange={(event)=> {
+              const post = JSON.parse(JSON.stringify(state.activeBlog));
+              post.title = event.target.value;
+              dispatch({ type: 'setActiveBlog', value: post})
+            }} />
+          </FormField>
+          <FormField label="Post Slug">
+            <TextInput placeholder="Post title" value={state.activeBlog.slug} onChange={(event)=> {
+              const post = JSON.parse(JSON.stringify(state.activeBlog));
+              post.slug = event.target.value;
+              dispatch({ type: 'setActiveBlog', value: post})
+            }} />
+          </FormField>
+          <FormField className="postEditFormField" label="Blog Content" elevation={"small"}>
+            <TextArea className='postEditor' elevation={"small"} pad='medium' value={state.activeBlog.content} onChange={(event)=> {
+              const post = JSON.parse(JSON.stringify(state.activeBlog));
+              console.log(event);
+              post.content = event.target.value;
+              dispatch({ type: 'setActiveBlog', value: post})
+            }} />
+          </FormField>
+          <FormField label="Excerpt">
+            <TextInput placeholder="Post excerpt" value={state.activeBlog.excerpt} onChange={(event)=> {
+              const post = JSON.parse(JSON.stringify(state.activeBlog));
+              post.excerpt = event.target.value;
+              dispatch({ type: 'setActiveBlog', value: post})
+            }} />
+          </FormField>
+        </Box>
+        <Box elevation="small" pad="small" className="editorPane">
+          <Markdown components={
+            {
+              "p": {
+                "component": Paragraph,
+                "props": {"size": "large", fill: true}
+              }
+            }}>{state.activeBlog.content}</Markdown>
+        </Box>
       </Box>
-      <Box elevation="small" pad="small" className="editorPane">
-        <FormField label="Post Title">
-          <TextInput placeholder="Post title" value={state.activeBlog.title} onChange={(event)=> {
-            const post = JSON.parse(JSON.stringify(state.activeBlog));
-            post.title = event.target.value;
-            dispatch({ type: 'setActiveBlog', value: post})
-          }} />
-        </FormField>
-        <FormField label="Post Slug">
-          <TextInput placeholder="Post title" value={state.activeBlog.slug} onChange={(event)=> {
-            const post = JSON.parse(JSON.stringify(state.activeBlog));
-            post.slug = event.target.value;
-            dispatch({ type: 'setActiveBlog', value: post})
-          }} />
-        </FormField>
-        <FormField className="postEditFormField" label="Blog Content" elevation={"small"}>
-          <TextArea className='postEditor' elevation={"small"} pad='medium' value={state.activeBlog.content} onChange={(event)=> {
-            const post = JSON.parse(JSON.stringify(state.activeBlog));
-            console.log(event);
-            post.content = event.target.value;
-            dispatch({ type: 'setActiveBlog', value: post})
-          }} />
-        </FormField>
-        <FormField label="Excerpt">
-          <TextInput placeholder="Post excerpt" value={state.activeBlog.excerpt} onChange={(event)=> {
-            const post = JSON.parse(JSON.stringify(state.activeBlog));
-            post.excerpt = event.target.value;
-            dispatch({ type: 'setActiveBlog', value: post})
-          }} />
-        </FormField>
-      </Box>
-      <Box elevation="small" pad="small" className="editorPane">
-        <Markdown components={
-          {
-            "p": {
-              "component": Paragraph,
-              "props": {"size": "large", fill: true}
-            }
-          }}>{state.activeBlog.content}</Markdown>
-      </Box>
-    </Box>
+    )}
+  </ResponsiveContext.Consumer>
   )
 }

@@ -1,11 +1,13 @@
 import "./Admin.css";
 import React, { useEffect, useState } from "react";
-import { Box, Heading, Text, Button } from 'grommet';
+import { Box, Heading, Text, Button, ResponsiveContext } from 'grommet';
 import AppliedRoute from "../components/AppliedRoute";
 import EditPost from '../components/EditPost';
 import AdminMenu from '../components/AdminMenu';
 import config from '../config.js';
 import { deletePost } from '../services/blogService';
+import MainMenu from '../components/MainMenu';
+import { Shop, Article, StatusGood } from 'grommet-icons';
 
 const getBlogs = async () => {
   try {
@@ -33,9 +35,9 @@ export default function Admin(props) {
   }
 
   const menuItems = [
-    { label: 'Manage Blog', onClick: () => {history.push('/admin/blog');}, title: 'Manage Blog' },
-    { label: 'Manage Enrollments', onClick: () => {history.push('/admin/enrollments');}, title: 'Manage Enrollments' },
-    { label: 'Manage Store', onClick: () => {history.push('/admin/store');}, title: 'Manage Store' }
+    { label: 'Edit Blog', icon: Article, onClick: () => {history.push('/admin/blog');}, title: 'Manage Blog' },
+    { label: 'View Enrollments', icon: StatusGood, onClick: () => {history.push('/admin/enrollments');}, title: 'Manage Enrollments' },
+    { label: 'Manage Store', icon: Shop, onClick: () => {history.push('/admin/store');}, title: 'Manage Store' }
   ]
 
   const loadBlogData = async (slug) => {
@@ -108,14 +110,25 @@ export default function Admin(props) {
   },[])
 
   return (
-    <Box>
-      <Heading level="1">Admin Page</Heading>
-      <Box border={'bottom'}>
-        <AdminMenu menuItems={menuItems} />
-      </Box>
-      <AppliedRoute path="/admin/blog" component={PostList} />
-      <AppliedRoute path="/admin/blog/:slug" component={EditPost} appProps={{ state: state, dispatch: dispatch, slug: slug}} />
-      <AppliedRoute path="/admin/blog/new" component={EditPost} appProps={{ state: state, dispatch: dispatch, slug: ''}} />
-    </Box>
+    <ResponsiveContext.Consumer>
+      {(size) => (
+        <Box>
+          <Heading level="1">Admin Page</Heading>
+          <Box border={'bottom'}>
+
+            <MainMenu
+              menuOverride={menuItems}
+              size={ size }
+              handleLogout={null}
+              history={ props.history }
+              state={ state }
+            />
+          </Box>
+          <AppliedRoute path="/admin/blog" component={PostList} />
+          <AppliedRoute path="/admin/blog/:slug" component={EditPost} appProps={{ state: state, dispatch: dispatch, slug: slug}} />
+          <AppliedRoute path="/admin/blog/new" component={EditPost} appProps={{ state: state, dispatch: dispatch, slug: ''}} />
+        </Box>
+      )}
+    </ResponsiveContext.Consumer>
   )
 }
