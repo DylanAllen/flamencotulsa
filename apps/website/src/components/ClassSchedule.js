@@ -80,8 +80,8 @@ export default function ClassSchedule(props) {
         }
       </Accordion>
       <Paragraph fill={true}>
-        <strong>LOCATIONS:</strong><br/>
-        Adult Classes - Destiny Dance Studio - 81st & Sheridan , Tulsa, OK , Next to Perry's Meat Market<br/>
+        <strong>Class Location:</strong><br/>
+        Destiny Dance Studio - 81st & Sheridan , Tulsa, OK , Next to Perry's Meat Market<br/>
         For more information contact: <a href="mailto:lexi@reflejosflamencos.com">lexi@reflejosflamencos.com</a>.
       </Paragraph>
         <ClassForm classList={list}  />
