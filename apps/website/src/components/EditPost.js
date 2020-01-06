@@ -7,8 +7,8 @@ import { loadBlogData, postBlog } from '../services/blogService';
 import MainMenu from './MainMenu';
 
 const savePost = async (slug, state, dispatch) => {
-  console.log('save the post');
-  return await postBlog(state.activeBlog, state, dispatch, slug)
+  const post = await postBlog(state.activeBlog, state, dispatch, slug)
+  return alert(post)
 }
 
 export default function EditPost(props) {
@@ -43,7 +43,7 @@ export default function EditPost(props) {
   ]
 
   useEffect(() => {
-    if (slug === 'new' && state.activeBlog.id) {
+    if (slug === 'new' && (state.activeBlog.id || !state.activeBlog.ContentType)) {
       dispatch({ type: 'setActiveBlog', value: {
         ContentType: 'blog',
         title: '',
