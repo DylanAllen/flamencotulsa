@@ -13,7 +13,12 @@ export default function Store(props) {
     try {
       const apiCall = await fetch(`${config.apiGateway.URL}/products`);
       const products = await apiCall.json();
-      return products;
+      const sorted = products.sort((a,b) => {
+        return (a.sort > b.sort) ? 1 : -1
+      })
+      console.log(sorted);
+
+      return sorted;
     } catch(err) {
       return []
     }

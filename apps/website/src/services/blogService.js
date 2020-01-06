@@ -4,7 +4,11 @@ export const getBlogs = async () => {
   try {
     const apiCall = await fetch(`${config.apiGateway.URL}/blog`);
     const blogs = await apiCall.json();
-    return blogs;
+    console.log(blogs);
+    const sorted = blogs.sort((a,b) => {
+      return (a.dateval < b.dateval) ? 1 : -1
+    })
+    return sorted;
   } catch(err) {
     return []
   }
@@ -54,10 +58,14 @@ export const postBlog = async (post, state, dispatch, slug) => {
     });
     const postResp = await apiCall.json();
     await loadBlogData(slug, state, dispatch, true);
-    return postResp;
+    if (postResp.message) {
+      return postResp.message
+    }
+
+    return 'Post successful!'
   } catch(err) {
     console.error('Error posting to blog', err);
-    return null;
+    return 'API post error.';
   }
 }
 
