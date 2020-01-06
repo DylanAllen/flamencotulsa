@@ -15,7 +15,8 @@ const initialState = {
     slug: '',
     content: '',
     excerpt: ''
-  }
+  },
+  enrollments: []
 };
 
 export const initReducer = (state=initialState) => {
@@ -86,6 +87,9 @@ export const authReducer = (state, action) => {
     case 'setActiveBlog':
       newstate.activeBlog = action.value;
       return localStorageHandler(newstate);
+    case 'setEnrollments':
+      newstate.enrollments = action.value;
+      return newstate;
     default:
       throw new Error();
   }

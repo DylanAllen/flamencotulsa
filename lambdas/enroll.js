@@ -29,6 +29,25 @@ const postEnrollment = async (event) => {
   }
 }
 
+const getEnrollments = async (event) => {
+
+  const params = {
+    TableName: process.env["CONTENT_TABLE"],
+    KeyConditionExpression: 'ContentType = :ctype',
+    ExpressionAttributeValues: {
+      ':ctype': 'enroll'
+    }
+  }
+
+  try {
+    const resp = await ddb.query(params).promise();
+    return apiResponse(resp.Items);
+  } catch (err) {
+    console.log('Error getting enrollments', err);
+    return apiResponse({message: 'Error getting enrollments'}, 410)
+  }
+}
+
 const apiResponse = (data, code=200) => {
   return  {
     statusCode: code,
@@ -54,7 +73,7 @@ const sendEmail = async (formData) => {
 
   let emailText = `
     <body>
-      <h2>New FlamencoTulsa Class Enrollment from ${Name}</h2>
+      <h4>Enrollment confirmation for: ${Name}</h4>
       <p>${allFormData()}</p>
     </body>
   `;
@@ -65,7 +84,7 @@ const sendEmail = async (formData) => {
     },
     Message: {
       Subject: {
-        Data: `New FlamencoTulsa Class Enrollment from ${Name}`
+        Data: `FlamencoTulsa Class Enrollment for ${Name}`
       },
       Body: {
         Html: {
@@ -85,6 +104,17 @@ const sendEmail = async (formData) => {
     return `Email not sent`;
   }
 
+  sesParams.Destination.ToAddresses = Email
+
+  try {
+    confirmation = await ses.sendEmail(sesParams).proimise();
+    console.log(confirmation);
+    return true;
+  } catch (err) {
+    console.log('Confirmation email failure', err);
+    return 'Confirmation email failure';
+  }
+
 }
 
 module.exports.handler = async (event, context) => {
@@ -92,6 +122,8 @@ module.exports.handler = async (event, context) => {
   switch(event.httpMethod) {
     case 'POST':
       return postEnrollment(event);
+    case 'GET':
+      return getEnrollments(event);
     default:
       return apiResponse({
         message: 'invalid input'

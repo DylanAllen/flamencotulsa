@@ -91,3 +91,16 @@ export const setBlogPost = (slug, state, dispatch) => {
     })
   }
 }
+
+export const getEnrollments = async (state) => {
+
+  const apiCall = await fetch(`${config.apiGateway.URL}/enroll`, {
+    method: 'get',
+    headers: new Headers({
+      Authorization: state.user.signInUserSession.idToken.jwtToken,
+    })
+  });
+  const enrollmentResp = await apiCall.json();
+  return enrollmentResp;
+
+}

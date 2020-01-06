@@ -25,7 +25,8 @@ const initialState = {
     slug: '',
     content: '',
     excerpt: ''
-  }
+  },
+  enrollments: []
 };
 
 function App(props) {

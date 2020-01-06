@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import { Box, Heading, Text, Button, ResponsiveContext } from 'grommet';
 import AppliedRoute from "../components/AppliedRoute";
 import EditPost from '../components/EditPost';
-import AdminMenu from '../components/AdminMenu';
+import EnrollmentList from '../components/EnrollmentList';
 import config from '../config.js';
-import { deletePost } from '../services/blogService';
+import { deletePost, getEnrollments } from '../services/blogService';
 import MainMenu from '../components/MainMenu';
 import { Shop, Article, StatusGood } from 'grommet-icons';
 
@@ -105,8 +105,14 @@ export default function Admin(props) {
     )
   }
 
+  const loadEnrollmentData = async () => {
+    const enrollments = await getEnrollments(state);
+    dispatch({ type: 'setEnrollments', value: enrollments });
+  }
+
   useEffect(() => {
     loadBlogData(props.match.params.slug);
+    loadEnrollmentData();
   },[])
 
   return (
@@ -124,6 +130,7 @@ export default function Admin(props) {
               state={ state }
             />
           </Box>
+          <AppliedRoute path="/admin/enrollments" component={EnrollmentList} appProps={{ state: state }} />
           <AppliedRoute path="/admin/blog" component={PostList} />
           <AppliedRoute path="/admin/blog/:slug" component={EditPost} appProps={{ state: state, dispatch: dispatch, slug: slug}} />
           <AppliedRoute path="/admin/blog/new" component={EditPost} appProps={{ state: state, dispatch: dispatch, slug: ''}} />
