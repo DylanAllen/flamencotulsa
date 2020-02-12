@@ -14,6 +14,20 @@ const getProducts = async () => {
   }
 }
 
+const postProduct = async (product) => {
+  const params = {
+    TableName: process.env["PRODUCT_TABLE"],
+    Item: product
+  }
+  try {
+    const resp = await ddb.put(params).promise();
+    return apiResponse(resp)
+  } catch(err) {
+    console.log('put error', err);
+    return apiResponse(null);
+  }
+}
+
 const apiResponse = (data) => {
   return  {
     statusCode: 200,
@@ -30,7 +44,7 @@ module.exports.handler = async (event, context) => {
     case 'GET':
       return await getProducts();
     case 'POST':
-      return await getProducts();
+      return await postProduct(JSON.parse(event.body));
     default:
       return apiResponse({
         message: 'invalid input'
