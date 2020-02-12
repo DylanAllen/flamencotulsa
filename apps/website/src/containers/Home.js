@@ -5,8 +5,6 @@ import CarouselBox from '../components/CarouselBox.js';
 
 export default function Home(props) {
 
-  const { state } = props;
-
   return (
     <div className="Home">
       <ResponsiveContext.Consumer>
