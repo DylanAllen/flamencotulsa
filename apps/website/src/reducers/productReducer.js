@@ -1,4 +1,4 @@
-export const initReducer = (state) => {
+export const initProdReducer = (state) => {
   console.log('Init the reducer', state)
   return state;
 }
