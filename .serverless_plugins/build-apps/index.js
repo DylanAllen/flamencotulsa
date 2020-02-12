@@ -102,6 +102,7 @@ const buildApps = sls => {
 };
 
 const cleanupNodeModules = () => {
+  loadAppData();
   for (const app of apps) {
     console.log();
     runAppCmd("rm -rf node_modules", app);
@@ -122,7 +123,6 @@ const doWork = async (sls, provider) => {
   performSubstitutions();
   writeChangesToDisk();
   buildApps(sls);
-  cleanupNodeModules();
 };
 
 class TaleBuildApps {
@@ -146,6 +146,7 @@ class TaleBuildApps {
       }
     };
     this.hooks = {
+      'before:package:createDeploymentArtifacts': cleanupNodeModules.bind(this,serverless),
       "after:deploy:deploy": () =>
         this.serverless.pluginManager.run(["taleBuildAndDeployApps"]),
       "taleBuildAndDeployApps:buildApps": doWork.bind(this, serverless, this.provider),
