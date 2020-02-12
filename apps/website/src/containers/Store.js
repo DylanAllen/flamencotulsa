@@ -1,13 +1,12 @@
 import "./Store.css";
-import React, { useReducer, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Box, Heading, Paragraph } from 'grommet';
-import { productReducer, initReducer } from '../reducers/productReducer.js';
 import ProductBox from '../components/ProductBox.js';
 import config from '../config.js';
 
 export default function Store(props) {
 
-  const [productState, productDispatch] = useReducer(productReducer, { products: [], avalue: false }, initReducer);
+  const {productState, productDispatch} = props;
 
   const getProducts = async () => {
     try {

@@ -8,6 +8,7 @@ import { Grommet, Heading, Box, ResponsiveContext, Text, Anchor } from 'grommet'
 import { FacebookOption } from 'grommet-icons';
 import { authReducer, initReducer } from './reducers/authReducer';
 import { theme } from './theme';
+import { productReducer, initProdReducer } from "./reducers/productReducer";
 
 const initialState = {
   isAuthenticating: false,
@@ -31,6 +32,7 @@ const initialState = {
 
 function App(props) {
   const [state, dispatch] = useReducer(authReducer, initialState, initReducer);
+  const [productState, productDispatch] = useReducer(productReducer, { products: [], avalue: false }, initProdReducer);
 
   async function onLoad() {
     try {
@@ -94,7 +96,7 @@ function App(props) {
                   state={ state }
                 />
               </Box>
-              <Routes appProps={{ state, dispatch }} />
+              <Routes appProps={{ state, dispatch, productState, productDispatch }} />
 
             </div>
           )}
