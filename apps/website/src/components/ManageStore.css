@@ -1,0 +1,12 @@
+.productsList {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 5px;
+}
+
+.productListItem {
+    display: grid;
+    grid-template-columns: 4fr 3fr 6fr auto auto;
+    border-bottom: 1px solid #eaeaea;
+    padding: 5px;
+}

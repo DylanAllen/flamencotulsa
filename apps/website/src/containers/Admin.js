@@ -4,6 +4,7 @@ import { Box, Heading, Text, Button, ResponsiveContext } from 'grommet';
 import AppliedRoute from "../components/AppliedRoute";
 import EditPost from '../components/EditPost';
 import EnrollmentList from '../components/EnrollmentList';
+import ManageStore from '../components/ManageStore';
 import config from '../config.js';
 import { deletePost, getEnrollments } from '../services/blogService';
 import MainMenu from '../components/MainMenu';
@@ -22,7 +23,7 @@ const getBlogs = async () => {
 
 export default function Admin(props) {
 
-  const { state, dispatch, history } = props;
+  const { state, dispatch, history, productState, productDispatch } = props;
 
   const [slug, setSlug] = useState(null);
 
@@ -131,6 +132,7 @@ export default function Admin(props) {
             />
           </Box>
           <AppliedRoute path="/admin/enrollments" component={EnrollmentList} appProps={{ state: state }} />
+          <AppliedRoute path="/admin/store" component={ManageStore} appProps={{ state, dispatch, productState, productDispatch }} />
           <AppliedRoute path="/admin/blog" component={PostList} />
           <AppliedRoute path="/admin/blog/:slug" component={EditPost} appProps={{ state: state, dispatch: dispatch, slug: slug}} />
           <AppliedRoute path="/admin/blog/new" component={EditPost} appProps={{ state: state, dispatch: dispatch, slug: ''}} />
